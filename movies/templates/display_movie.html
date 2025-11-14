@@ -1,0 +1,15 @@
+<h2>{{ movie.Título }}</h2>
+
+{% if movie.imagen %}
+    <img src="{{ movie.imagen.url }}" alt="{{ movie.Título }}" class="img-fluid rounded">
+{% endif %}
+
+<p><strong>Año:</strong> {{ movie.Año }}</p>
+
+<p><strong>Director:</strong> {{ movie.Director }}</p>
+
+<p><strong>Categoría:</strong> {{ movie.Categoría }}</p>
+
+<p><strong>Sinapsis:</strong> {{ movie.Sinapsis }}</p>
+
+<a href="{% url 'home' %}" class="btn btn-secondary">Volver</a>

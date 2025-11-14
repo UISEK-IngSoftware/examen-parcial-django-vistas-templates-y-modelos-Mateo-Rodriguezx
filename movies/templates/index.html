@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<h3 class="mt-4">🎬 Películas</h3>
+
+<div class="text-end mb-3">
+    <a href="{% url 'movies:add_movie' %}" class="btn btn-primary">
+        <i class="fa-solid fa-plus"></i> Añadir película
+    </a>
+</div>
+
+<div class="row">
+
+    {% for movie in movies %}
+    <div class="col-md-4 col-lg-3 mb-4">
+        <div class="card shadow-sm h-100">
+
+            {% if movie.imagen %}
+            <img src="{{ movie.imagen.url }}" class="card-img-top">
+            {% else %}
+            <img src="{% static 'logo2.png' %}" class="card-img-top">
+            {% endif %}
+
+            <div class="card-body">
+                <h5 class="card-title">{{ movie.Título }}</h5>
+                <p class="card-text mb-1"><strong>Año:</strong> {{ movie.Año }}</p>
+                <p class="card-text mb-1"><strong>Director:</strong> {{ movie.Director }}</p>
+                <p class="card-text"><strong>Categoría:</strong> {{ movie.Categoría }}</p>
+            </div>
+
+            <div class="card-footer text-center">
+                <a href="{% url 'movies:view_movie' movie.id %}" class="btn btn-info btn-sm">
+                    <i class="fa-solid fa-eye"></i>
+                </a>
+
+                <a href="{% url 'movies:edit_movie' movie.id %}" class="btn btn-warning btn-sm">
+                    <i class="fa-solid fa-pen"></i>
+                </a>
+
+                <a href="{% url 'movies:delete_movie' movie.id %}" class="btn btn-danger btn-sm">
+                    <i class="fa-solid fa-trash"></i>
+                </a>
+            </div>
+
+        </div>
+    </div>
+    {% endfor %}
+
+</div>
+
+{% endblock %}

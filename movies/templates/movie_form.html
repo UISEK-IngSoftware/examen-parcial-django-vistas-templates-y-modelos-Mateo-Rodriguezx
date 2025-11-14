@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>{{ movie.id|default:"Agregar" }} Película</h2>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="mb-3">
+            <label for="Título">Título</label>
+            <input type="text" name="Título" id="Título" class="form-control"
+                   value="{{ movie.Título|default:'' }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="Año">Año</label>
+            <input type="number" name="Año" id="Año" class="form-control"
+                   value="{{ movie.Año|default:'' }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="Director">Director</label>
+            <input type="text" name="Director" id="Director" class="form-control"
+                   value="{{ movie.Director|default:'' }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="Categoría">Categoría</label>
+            <input type="text" name="Categoría" id="Categoría" class="form-control"
+                   value="{{ movie.Categoría|default:'' }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="Sinapsis">Sinapsis</label>
+            <textarea name="Sinapsis" id="Sinapsis" class="form-control" rows="4" required>{{ movie.Sinapsis|default:"" }}</textarea>
+        </div>
+
+        <div class="mb-3">
+            <label for="imagen">Imagen</label>
+            <input type="file" name="imagen" id="imagen" class="form-control">
+        </div>
+
+        {% if movie.imagen %}
+        <div class="mb-3">
+            <p>Imagen actual:</p>
+            <img src="{{ movie.imagen.url }}" width="150">
+        </div>
+        {% endif %}
+
+        <button type="submit" class="btn btn-success">Guardar</button>
+        <a href="{% url 'movies:index' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+{% endblock %}
